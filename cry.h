@@ -11,39 +11,60 @@
 #include <future>
 #include <tuple>
 #include "cry.cpp"
+#include "thread_pool.cpp"
 
 
+using namespace cry;
 //enumerate
 template <typename T,
           typename TIter = decltype(std::begin(std::declval<T>())),
           typename = decltype(std::end(std::declval<T>()))>
-constexpr auto cry::enumerate(T &&);
+constexpr auto enumerate(T &&);
 
 
 //thread pool
-namespace cry
+//namespace cry
+//{
+    //class Thread_Pool
+    //{
+        //public:
+            //Thread_Pool::Thread_Pool(std::size_t);
+            //Thread_Pool::~Thread_Pool();
+                        
+            //template<class T>
+            //auto enqueue(T task) -> std::future<decltype(task())>;
+    //};
+//}
+class Thread_Pool
 {
-    class Thread_Pool
-    {
-        public:
-            using Task = std::function<void()>;
-            explicit Thread_Pool(std::size_t);
-            ~Thread_Pool();
+    Thread_Pool(std::size_t);
+    ~Thread_Pool();
+
+    template<class T>
+    auto enqueue(T task) -> std::future<decltype(task())>;
+};
+//namespace cry
+//{
+    //class Thread_Pool
+    //{
+        //public:
+            //using Task = std::function<void()>;
+            //explicit Thread_Pool(std::size_t);
+            //~Thread_Pool();
             
-            template<class T>
-            auto enqueue(T task) -> std::future<decltype(task())>;
+            //template<class T>
+            //auto enqueue(T task) -> std::future<decltype(task())>;
+        //private:
+            //std::vector<std::thread> pool;
+            //std::queue<Task> Task_Queue;
 
-        private:
-            std::vector<std::thread>;
-            std::queue<Task>;
+            //std::condition_variable Event_Variable;
+            //std::mutex Event_Mutex;
+            //bool die;
 
-            std::condition_variable;
-            std::mutex;
-            bool die;
-
-            void init(std::size_t n_threads);
-            void exit();
-    };
-}
+            //void init(std::size_t n_threads);
+            //void exit();
+    //};
+//}
 
 #endif
