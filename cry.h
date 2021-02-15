@@ -26,7 +26,7 @@ namespace cry
     class Thread_Pool
     {
         public:
-            using Task;
+            using Task = std::function<void()>;
             explicit Thread_Pool(std::size_t);
             ~Thread_Pool();
             
