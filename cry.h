@@ -2,6 +2,7 @@
 #define CRY_H
 
 #include <thread>
+#include <algorithm>
 #include <queue>
 #include <functional>
 #include <mutex>
@@ -21,20 +22,12 @@ template <typename T,
           typename = decltype(std::end(std::declval<T>()))>
 constexpr auto enumerate(T &&);
 
+template<class Container>
+void print_container( const Container &, const char* spacer = " " );
 
-//thread pool
-//namespace cry
-//{
-    //class Thread_Pool
-    //{
-        //public:
-            //Thread_Pool::Thread_Pool(std::size_t);
-            //Thread_Pool::~Thread_Pool();
-                        
-            //template<class T>
-            //auto enqueue(T task) -> std::future<decltype(task())>;
-    //};
-//}
+template<class Container, class Condition>
+void remove_if(Container, Condition);
+
 class Thread_Pool
 {
     Thread_Pool(std::size_t);
@@ -43,28 +36,5 @@ class Thread_Pool
     template<class T>
     auto enqueue(T task) -> std::future<decltype(task())>;
 };
-//namespace cry
-//{
-    //class Thread_Pool
-    //{
-        //public:
-            //using Task = std::function<void()>;
-            //explicit Thread_Pool(std::size_t);
-            //~Thread_Pool();
-            
-            //template<class T>
-            //auto enqueue(T task) -> std::future<decltype(task())>;
-        //private:
-            //std::vector<std::thread> pool;
-            //std::queue<Task> Task_Queue;
-
-            //std::condition_variable Event_Variable;
-            //std::mutex Event_Mutex;
-            //bool die;
-
-            //void init(std::size_t n_threads);
-            //void exit();
-    //};
-//}
 
 #endif
