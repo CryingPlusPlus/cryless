@@ -25,7 +25,7 @@ namespace cry
              
         };
 
-        return iterable_wrapper{ std::forward<T>(iterable)  };
+        return std::move(iterable_wrapper{ std::forward<T>(iterable)  });
     }
 
     template<class Container>
@@ -50,5 +50,11 @@ namespace cry
         {
             f(first);
         }
+    }
+    template<class Container>
+    constexpr auto max(Container cont)
+    {
+        std::sort(cont.begin(), cont.end());
+        return std::move(cont.back());
     }
 }
