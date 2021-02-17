@@ -29,7 +29,7 @@ namespace cry
     }
 
     template<class Container>
-    void print_container( const Container &cont, const char* spacer = " " )
+    constexpr void print_container( const Container &cont, const char* spacer = " " )
     {
         typedef typename Container::value_type T;
         std::copy(cont.begin(), cont.end(), std::ostream_iterator<T>(std::cout, spacer));
@@ -37,10 +37,18 @@ namespace cry
     }
 
     template<class Container, class Condition>
-    void remove_if(Container &cont, Condition condition)
+    constexpr void remove_if(Container &cont, Condition condition)
     {
         const auto new_end = std::remove_if(cont.begin(), cont.end(), condition);
         cont.erase(new_end, cont.end());
     }
 
+    template<class InputIt, class UnaryFunction>
+    constexpr void for_each_iterator(InputIt first, InputIt last, UnaryFunction f)
+    {
+        for (; first != last; ++first) 
+        {
+            f(first);
+        }
+    }
 }

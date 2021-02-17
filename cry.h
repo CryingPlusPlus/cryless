@@ -8,6 +8,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <iostream>
+#include <iterator>
 #include <vector>
 #include <future>
 #include <tuple>
@@ -23,10 +24,10 @@ template <typename T,
 constexpr auto enumerate(T &&);
 
 template<class Container>
-void print_container( const Container &, const char* spacer = " " );
+constexpr void print_container( const Container &, const char* spacer = " " );
 
 template<class Container, class Condition>
-void remove_if(Container, Condition);
+constexpr void remove_if(Container, Condition);
 
 class Thread_Pool
 {
@@ -36,5 +37,8 @@ class Thread_Pool
     template<class T>
     auto enqueue(T task) -> std::future<decltype(task())>;
 };
+
+template<class InputIt, class UnaryFunction>
+constexpr void for_each_iterator(InputIt first, InputIt last, UnaryFunction f);
 
 #endif
