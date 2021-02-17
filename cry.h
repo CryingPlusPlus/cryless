@@ -41,4 +41,6 @@ class Thread_Pool
 template<class InputIt, class UnaryFunction>
 constexpr void for_each_iterator(InputIt first, InputIt last, UnaryFunction f);
 
+template<class Container>
+constexpr auto max(Container);
 #endif
