@@ -1,6 +1,5 @@
 
 #include "cry.h"
-//this is not my code!!! Credit: http://reedbeta.com/blog/python-like-enumerate-in-cpp17/
 namespace cry
 {
     template <typename T,
@@ -8,6 +7,7 @@ namespace cry
               typename = decltype(std::end(std::declval<T>()))>
     constexpr auto enumerate(T && iterable)
     {
+    //enumerate is not my code!!! Credit: http://reedbeta.com/blog/python-like-enumerate-in-cpp17/
         struct iterator
         {
             size_t i;
