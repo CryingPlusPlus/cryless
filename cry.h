@@ -44,7 +44,4 @@ constexpr void for_each_iterator(InputIt first, InputIt last, UnaryFunction f);
 template<class Container>
 constexpr auto max(Container);
 
-template<class ... Container, class Iterators>
-constexpr auto zip(Container && ... cont);
-
 #endif
