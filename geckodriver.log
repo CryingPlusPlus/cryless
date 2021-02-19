@@ -1,0 +1,16 @@
+1613670183557	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\Ben\\AppData\\Local\\Temp\\rust_mozprofile85tgv9"
+*** You are running in headless mode.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1613670185387	Marionette	INFO	Listening on port 49276
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1613670185624	Marionette	WARN	TLS certificate errors will be ignored for this session
+1613670185636	Marionette	ERROR	[18] No reply from Marionette:Register
+JavaScript error: https://lms.at/resources/ckeditor/ckeditor.4.11/ckeditor.js, line 258: TypeError: c[a] is undefined
+JavaScript error: https://lms.at/resources/ckeditor/ckeditor.4.11/ckeditor.js, line 258: TypeError: c[a] is undefined
+JavaScript error: https://lms.at/resources/ckeditor/ckeditor.4.11/ckeditor.js, line 258: TypeError: c[a] is undefined
+JavaScript error: https://lms.at/resources/ckeditor/ckeditor.4.11/ckeditor.js, line 258: TypeError: c[a] is undefined
+JavaScript error: https://lms.at/resources/ckeditor/ckeditor.4.11/ckeditor.js, line 258: TypeError: c[a] is undefined
+JavaScript error: https://lms.at/resources/ckeditor/ckeditor.4.11/ckeditor.js, line 258: TypeError: c[a] is undefined
+1613670190936	Marionette	INFO	Stopped listening on port 49276
+JavaScript error: https://lms.at/resources/ckeditor/ckeditor.4.11/ckeditor.js, line 258: TypeError: c[a] is undefined
