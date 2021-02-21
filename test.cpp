@@ -10,7 +10,7 @@ class Base_Iterator
     public:
         bool operator != (const Base_Iterator & other){ return iter != other.iter; }
         void operator ++ (){}
-        auto operator * () { return *iter; }
+        auto operator * () { return 3; }
 };
 
 template<typename T>
@@ -25,24 +25,8 @@ class Iterator: public Base_Iterator
         template<typename U>
         bool operator != (const Iterator<U> & other) { return false; }
         void operator ++ () { ++iter; }
-        auto operator * () { return *iter; }
+        virtual auto operator * () { return *iter; }
 };
-
-template <class T, std::size_t N, std::size_t... Is>
-auto unpack_impl(std::array<T, N> &arr, std::index_sequence<Is...>) -> decltype(std::make_tuple(arr[Is]...)) {
-        return std::make_tuple( arr[Is]...  );
-}
-
-template <class T, std::size_t N>
-auto unpack(std::array<T, N> &arr) -> decltype(unpack_impl(arr, make_index_sequence<N>{})) {
-        return unpack_impl(arr, std::make_index_sequence<N>{});
-}
-
-template<std::size_t S, typename U>
-auto dereference(std::array<U, S> arr)
-{
-    return std::tie() = unpack(arr);
-}
 
 
 template<std::size_t S>
@@ -59,14 +43,31 @@ class Packed_Iterator
             return end;
         }
         void operator ++ () { std::for_each( iters.begin(), iters.end(), [](auto &iter){ ++iter; } ); }
-        auto operator * () { return dereference(); }
+        auto operator * () { return unpack(iters); }
+    private:
+        template <class T, std::size_t N, std::size_t... Is>
+        auto unpack_impl(std::array<T, N> &arr, std::index_sequence<Is...>) -> decltype(std::make_tuple(*arr[Is]...)) {
+            return std::make_tuple( *arr[Is]...  );
+        }
 
+        template <class T, std::size_t N>
+        auto unpack(std::array<T, N> &arr) -> decltype(unpack_impl(arr, std::make_index_sequence<N>{})) {
+            return unpack_impl(arr, std::make_index_sequence<N>{});
+        }
 };
-
 int main()
 {
-    std::array<int, 3> arr{1, 2, 3};
-
-    auto [a, b, c] = dereference(arr);
+    std::vector<int> vec1{1, 2, 3};
+    std::vector<int> vec2{4, 5, 6};
+    Iterator i1{ std::begin(vec1) };
+    Iterator i2{ std::begin(vec2) };
+    std::array<Base_Iterator, 2> arr{ i1, i2 };
+    Packed_Iterator packed{arr};
+    int a, b, c, d;
+    std::tie(a, b) = *packed;
+    std::cout << a << " " << b << std::endl;
+    ++packed;
+    std::tie(c, d) = *packed;
+    std::cout << c << " " << d << std::endl;
     return 0;
 }
