@@ -5,12 +5,12 @@
 
 class Base_Iterator
 {
-    private:
-        std::vector<int>::const_iterator iter;
-    public:
-        bool operator != (const Base_Iterator & other){ return iter != other.iter; }
-        void operator ++ (){}
-        auto operator * () { return 3; }
+    //private:
+        //std::vector<int>::const_iterator iter;
+    //public:
+        //bool operator != (const Base_Iterator & other){ return iter != other.iter; }
+        //void operator ++ (){}
+        //auto operator * () { return 3; }
 };
 
 template<typename T>
@@ -33,8 +33,8 @@ template<std::size_t S>
 class Packed_Iterator
 {
     public:
-        std::array<Base_Iterator, S> iters;
-        Packed_Iterator( std::array<Base_Iterator, S> & iters ) { this -> iters = iters; }
+        std::array<std::shared_ptr<Base_Iterator*>, S> iters;
+        Packed_Iterator(std::shared_ptr<Base_Iterator*>, S> & iters ) { this -> iters = iters; }
         bool operator != ( const Packed_Iterator & other )
         {
             bool end = true;
